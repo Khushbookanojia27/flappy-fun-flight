@@ -4,6 +4,7 @@ import Pipe from "./Pipe";
 import Ground from "./Ground";
 import Cloud from "./Cloud";
 import GameOverlay from "./GameOverlay";
+import useGameSounds from "@/hooks/useGameSounds";
 
 const GAME_WIDTH = 400;
 const GAME_HEIGHT = 600;
@@ -53,11 +54,14 @@ const FlappyBirdGame = () => {
   const pipeSpawnRef = useRef<number>();
   const pipeIdRef = useRef(0);
 
+  const { playJump, playScore, playGameOver } = useGameSounds();
+
   const jump = useCallback(() => {
     if (gameState === "playing") {
       setVelocity(JUMP_FORCE);
+      playJump();
     }
-  }, [gameState]);
+  }, [gameState, playJump]);
 
   const startGame = useCallback(() => {
     setBirdY(GAME_HEIGHT / 2 - BIRD_SIZE / 2);
@@ -70,11 +74,12 @@ const FlappyBirdGame = () => {
 
   const endGame = useCallback(() => {
     setGameState("gameover");
+    playGameOver();
     if (score > bestScore) {
       setBestScore(score);
       localStorage.setItem("flappyBestScore", score.toString());
     }
-  }, [score, bestScore]);
+  }, [score, bestScore, playGameOver]);
 
   // Handle input
   useEffect(() => {
@@ -191,9 +196,10 @@ const FlappyBirdGame = () => {
       if (!pipe.scored && pipe.x + PIPE_WIDTH < BIRD_X) {
         pipe.scored = true;
         setScore((prev) => prev + 1);
+        playScore();
       }
     }
-  }, [birdY, pipes, gameState, endGame]);
+  }, [birdY, pipes, gameState, endGame, playScore]);
 
   const handleClick = () => {
     if (gameState === "playing") {
