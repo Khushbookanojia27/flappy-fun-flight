@@ -7,7 +7,7 @@ interface PipeProps {
   gameHeight: number;
 }
 
-const PIPE_WIDTH = 70;
+const PIPE_WIDTH = 60;
 const CAP_HEIGHT = 30;
 const CAP_OVERHANG = 8;
 
