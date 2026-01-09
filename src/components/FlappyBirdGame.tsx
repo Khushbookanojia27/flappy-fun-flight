@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import Bird from "./Bird";
-import Pipe from "./Pipe";
+import Wire from "./Wire";
 import Ground from "./Ground";
 import Cloud from "./Cloud";
 import GameOverlay from "./GameOverlay";
@@ -17,7 +17,7 @@ const PIPE_GAP = 160;
 const PIPE_SPEED = 3;
 const PIPE_SPAWN_INTERVAL = 1800;
 
-interface PipeData {
+interface WireData {
   id: number;
   x: number;
   gapY: number;
@@ -36,7 +36,7 @@ const FlappyBirdGame = () => {
   const [gameState, setGameState] = useState<"start" | "playing" | "gameover">("start");
   const [birdY, setBirdY] = useState(GAME_HEIGHT / 2 - BIRD_SIZE / 2);
   const [velocity, setVelocity] = useState(0);
-  const [pipes, setPipes] = useState<PipeData[]>([]);
+  const [Wire, setWire] = useState<PipeData[]>([]);
   const [clouds, setClouds] = useState<CloudData[]>([
     { id: 1, x: 100, y: 50, size: 0.8, speed: 0.5 },
     { id: 2, x: 280, y: 120, size: 0.6, speed: 0.3 },
