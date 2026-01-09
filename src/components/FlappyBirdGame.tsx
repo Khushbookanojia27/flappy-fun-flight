@@ -82,23 +82,17 @@ const FlappyBirdGame = () => {
   }, [score, bestScore, playGameOver]);
 
   // Handle input
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.code === "ArrowUp") {
-        e.preventDefault();
-        if (gameState === "playing") {
-          jump(); // fly up
-        } else {
-          startGame();
-        }
-      }
-      if (e.code === "ArrowDown") {
-        e.preventDefault();
-        if (gameState === "playing") {
-          setVelocity(5); // push bird down
-        }
-      }
-    };
+useEffect(() => { 
+    const handleKeyDown = (e: KeyboardEvent) => { 
+      if (e.code === "Space") { 
+        e.preventDefault(); 
+      if (gameState === "playing") { 
+        jump(); 
+      } else { 
+        startGame(); 
+      } 
+    } 
+  };
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
