@@ -2,84 +2,79 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 197 71% 73%;
+    --foreground: 120 61% 20%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 120 61% 20%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 120 61% 20%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 120 61% 34%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 43 96% 56%;
+    --secondary-foreground: 120 61% 20%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 197 50% 85%;
+    --muted-foreground: 197 30% 40%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 14 100% 57%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 120 30% 70%;
+    --input: 120 30% 70%;
+    --ring: 120 61% 34%;
 
     --radius: 0.5rem;
 
+    /* Game-specific colors */
+    --sky-top: 197 71% 73%;
+    --sky-bottom: 197 60% 85%;
+    --ground: 33 53% 31%;
+    --ground-light: 43 53% 45%;
+    --pipe: 120 61% 34%;
+    --pipe-light: 120 50% 45%;
+    --pipe-dark: 120 70% 22%;
+    --bird-body: 43 96% 56%;
+    --bird-wing: 33 90% 50%;
+    --bird-beak: 14 100% 57%;
+
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
-
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
-
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
-
     --primary: 210 40% 98%;
     --primary-foreground: 222.2 47.4% 11.2%;
-
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
-
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
-
     --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
-
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
@@ -101,5 +96,114 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Press Start 2P', cursive;
+  }
+}
+
+@layer components {
+  .game-container {
+    background: linear-gradient(
+      to bottom,
+      hsl(var(--sky-top)) 0%,
+      hsl(var(--sky-bottom)) 100%
+    );
+  }
+
+  .ground-pattern {
+    background: repeating-linear-gradient(
+      90deg,
+      hsl(var(--ground)) 0px,
+      hsl(var(--ground)) 24px,
+      hsl(var(--ground-light)) 24px,
+      hsl(var(--ground-light)) 48px
+    );
+  }
+
+  .pipe-body {
+    background: linear-gradient(
+      90deg,
+      hsl(var(--pipe-dark)) 0%,
+      hsl(var(--pipe)) 15%,
+      hsl(var(--pipe-light)) 50%,
+      hsl(var(--pipe)) 85%,
+      hsl(var(--pipe-dark)) 100%
+    );
+  }
+
+  .pipe-cap {
+    background: linear-gradient(
+      90deg,
+      hsl(var(--pipe-dark)) 0%,
+      hsl(var(--pipe)) 10%,
+      hsl(var(--pipe-light)) 50%,
+      hsl(var(--pipe)) 90%,
+      hsl(var(--pipe-dark)) 100%
+    );
+  }
+
+  .bird-body {
+    background: radial-gradient(
+      circle at 30% 30%,
+      hsl(50 100% 70%) 0%,
+      hsl(var(--bird-body)) 50%,
+      hsl(var(--bird-wing)) 100%
+    );
+  }
+
+  .game-title {
+    text-shadow: 
+      3px 3px 0 hsl(var(--pipe-dark)),
+      -1px -1px 0 hsl(var(--pipe-dark)),
+      1px -1px 0 hsl(var(--pipe-dark)),
+      -1px 1px 0 hsl(var(--pipe-dark));
+  }
+
+  .score-display {
+    text-shadow: 
+      2px 2px 0 hsl(var(--pipe-dark)),
+      -1px -1px 0 hsl(var(--pipe-dark)),
+      1px -1px 0 hsl(var(--pipe-dark)),
+      -1px 1px 0 hsl(var(--pipe-dark));
+  }
+}
+
+@layer utilities {
+  .animate-flap {
+    animation: flap 0.2s ease-in-out;
+  }
+
+  @keyframes flap {
+    0%, 100% {
+      transform: rotate(0deg) scaleY(1);
+    }
+    50% {
+      transform: rotate(-15deg) scaleY(0.9);
+    }
+  }
+
+  .animate-fall {
+    animation: fall 0.1s ease-in;
+  }
+
+  @keyframes fall {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(25deg);
+    }
+  }
+
+  .cloud-float {
+    animation: cloudFloat 20s linear infinite;
+  }
+
+  @keyframes cloudFloat {
+    0% {
+      transform: translateX(100vw);
+    }
+    100% {
+      transform: translateX(-200px);
+    }
   }
 }
